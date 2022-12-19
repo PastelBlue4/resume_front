@@ -1,7 +1,42 @@
 import Head from "next/head";
+import { useState } from "react";
+import ImageBlock from "../components/ImageBlock";
 import MainContainer from "../components/MainContainer";
 
+interface ImageAttributetype {
+  src: string;
+  width: number;
+  height: number;
+  border: string;
+  rounded?: string;
+  alt: string;
+}
+
+interface resumeBlocksType {
+  id: string;
+  createDate: Date;
+  grid: "string";
+  blocks: [
+    {
+      blockKinds: "image" | "chart" | "text";
+      src?: string;
+      width: number;
+      height: number;
+      border?: string;
+      rounded?: string;
+      alt?: string;
+    }
+  ];
+}
+
 export default function Home() {
+  const [testData, setTestData] = useState<ImageAttributetype>({
+    src: "/public/moko.jpeg",
+    width: 300,
+    height: 300,
+    border: "1px solid black",
+    alt: "nothing",
+  });
   return (
     <>
       <Head>
@@ -11,6 +46,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainContainer></MainContainer>
+      <ImageBlock data={testData} />
     </>
   );
 }
+
+// blocks는 배열로 map을 수행하면서 필요한 데이터를 각 ImageCoponents 등에 전달함.
